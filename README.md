@@ -45,7 +45,7 @@ dopamine level.
 | 0.88 | fatigued | 174 | +3.7 neurons |
 | 0.78 | depleted | 48 | +22.0 neurons |
 
-At DA = 0.78, the late-period bump centroid (265–295 ms) is shifted by +22 neurons
+At DA = 0.78, the late-period bump centroid (265-295 ms) is shifted by +22 neurons
 relative to the cued location, indicating a large working-memory error after the
 distractor period. At DA ≥ 0.88, the final centroid remains within ~4 neurons of
 the cue, consistent with only noise-level perturbation.
