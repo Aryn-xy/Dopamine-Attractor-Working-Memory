@@ -29,9 +29,7 @@ vulnerable to interference.
 ## Experimental Protocol
 
 ```
-0 ms  ──── baseline (50 ms) ──── cue ON ──── cue OFF ──── distractor ──── silence
-            spontaneous            neuron 50    t=150ms    neuron 0         t=260ms
-                                   100ms stim              30ms, half-amp
+0 ms: baseline (50 ms, spontaneous) -> cue ON (100 ms at neuron 50) -> cue OFF (t = 150 ms) -> distractor (30 ms, half-amplitude at neuron 0) -> silence -> end (t = 260 ms)
 ```
 
 Three DA conditions are run with identical noise seeds so the only variable is
@@ -94,9 +92,9 @@ to stdout.
 Main parameters are at the top of the file:
 
 ```python
-J_e       = 7.0      # peak excitatory weight (mV)
-J_i       = 0.2      # flat inhibitory offset (mV)
-sig_e     = 0.05     # Gaussian half-width (fraction of ring)
+J_e = 7.0      # peak excitatory weight (mV)
+J_i = 0.2      # flat inhibitory offset (mV)
+sig_e = 0.05     # Gaussian half-width (fraction of ring)
 da_levels = [1.0, 0.88, 0.78]   # DA conditions to compare
 ```
 
