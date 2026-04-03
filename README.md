@@ -81,8 +81,13 @@ the distractor - a measurable working memory error.
 
 ## Running it
 
+Install dependencies:
 ```bash
-pip install brian2 matplotlib numpy
+pip install -r requirements.txt
+```
+
+Run the simulation:
+```bash
 python ring_attractor_dopamine.py
 ```
 
