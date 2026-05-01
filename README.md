@@ -26,6 +26,58 @@ vulnerable to interference.
 
 ---
 
+## Model Equations
+
+### Neuron dynamics (LIF with noise)
+
+$$\tau \frac{dv}{dt} = v_{rest} - v + I_{bg} + I_{ext} + g_{syn} + \xi \sigma \sqrt{\tau}$$
+
+Spike condition and reset:
+
+$$v > v_{thr} \quad \Rightarrow \quad v \leftarrow v_{reset}$$
+
+Each neuron integrates background drive, external input, recurrent synaptic current, and additive Gaussian white noise (amplitude $\sigma$, implemented as $\xi \sigma \sqrt{\tau}$). Parameters: $\tau = 15\text{ ms}$, $v_{rest} = v_{reset} = -70\text{ mV}$, $v_{thr} = -50\text{ mV}$.
+
+---
+
+### Synaptic dynamics (exponential decay)
+
+$$\tau_{syn} \frac{dg_{syn}}{dt} = -g_{syn}$$
+
+Incremented on each presynaptic spike:
+
+$$g_{syn} \leftarrow g_{syn} + w_{ij}$$
+
+Parameter: $\tau_{syn} = 5\text{ ms}$.
+
+---
+
+### Recurrent connectivity (Mexican-hat + dopamine gain)
+
+$$w_{ij} = da \cdot J_e \cdot \exp\!\left(-\frac{1}{2}\left(\frac{d_{ij}}{\sigma_e}\right)^2\right) - J_i$$
+
+where $d_{ij}$ is the circular distance between neurons $i$ and $j$ on the ring:
+
+$$d_{ij} = \min(|i - j|,\; N - |i - j|)$$
+
+and $da \in [0, 1]$ is the dopamine gain factor mimicking D1 receptor activation. Parameters: $J_e = 7.0\text{ mV}$, $J_i = 0.2\text{ mV}$, $\sigma_e = 0.05$.
+
+Dopamine scales the recurrent excitatory gain $J_e^{eff} = da \cdot J_e$, shifting the network between stable and distractor-sensitive regimes:
+- High $da$ → strong recurrent excitation → bump resists distractors
+- Low $da$ → weak excitation → distractor can capture or destabilise the bump
+
+---
+
+### Bump centroid (circular mean readout)
+
+$$\theta_i = \frac{2\pi i}{N}$$
+
+$$\text{centroid} = \frac{N}{2\pi} \cdot \text{atan2}\!\left(\langle \sin \theta_i \rangle,\, \langle \cos \theta_i \rangle\right)$$
+
+Population activity is decoded using a circular mean to correctly handle the periodic boundary of the ring. Reported centroid offsets in the Results table are relative to the cue location (neuron 50).
+
+---
+
 ## Experimental Protocol
 
 ```
