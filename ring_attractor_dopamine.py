@@ -6,7 +6,6 @@ Below a threshold (~0.79), the bump cannot persist during the delay
 period, even without a distractor. Above it, the bump survives and
 resists distractors.
 
-Refs: Compte et al. (2000), Wang (2001), Durstewitz & Seamans (2008)
 """
 
 from brian2 import *
